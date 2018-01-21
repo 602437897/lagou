@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{% static 'js/echarts.js' %}">
+    </script>
+</head>
+<body>
+    <div id="main" style="width:1800px;height: 600px">
+
+    </div>
+    <form action="{% url "lagoushow:index" %}" method="get" id="myform">
+    </form>
+    <script>
+        function refresh() {
+            console.log("刷新界面");
+            document.getElementById("myform").submit();
+        }
+        setInterval("refresh();", 10*1000);
+        var mychart = echarts.init(document.getElementById('main'));
+
+        var option = {
+            title:{
+                text: 'ECharts 入门实例'
+            },
+            tooltip:{},
+            legend:{
+                data:['职位数量']
+            },
+            xAxis:{
+                data: {{ position_kind|safe }}
+                },
+            yAxis:{},
+            series:[{
+                name: '职位数量',
+                type: 'bar',
+                data: {{ kind_num|safe }}
+                }]
+            };
+        mychart.setOption(option);
+    </script>
+</body>
+</html>

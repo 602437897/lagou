@@ -1,0 +1,2 @@
+# lagou
+使用scrapy框架爬取拉勾网全国python的职位信息，然后将数据存储到mongodb数据库中
